@@ -12,7 +12,7 @@ let dTheme = document.getElementById("display-theme");
 let list = document.getElementById("name-list");
 let themeList = document.getElementById("theme-list");
 let names = ["Lucas", "Linus"];
-let themeNames = ["80-tal", "70-tal", "50-tal", "disco", "fantasy", "fire"];
+let themeNames = ["80-tal", "70-tal", "50-tal", "70-tal", "90-tal", "jazz", "superhjältar", "Antagonister", "rustikt och robust"];
 let history = ["80-tal", "70-tal", "50-tal", "disco", "fantasy"];
 
 saveJSON();
@@ -80,7 +80,7 @@ function addThemes() {
 function clearTheme() {
   while (themeList.firstChild) themeList.removeChild(themeList.firstChild);
 
-  themeNames.length = 6;
+  themeNames.length = 9;
 
   themeNames.forEach((item) => {
     let li = document.createElement("li");
@@ -96,7 +96,7 @@ function clearTheme() {
 //!------------------------------------------------------------- delete latest theme -----------------------------------------------------------------
 
 function deleteTheme() {
-  if (themeNames.length <= 6) {
+  if (themeNames.length <= 9) {
     deleteThemeBtn.disabled = true;
     deleteThemeBtn.style.color = "red";
     saveJSON();
@@ -206,7 +206,7 @@ function rndTheme() {
 
 function displayTheme() {
   
-    if(dTheme.innerText == history[3,4]){  
+    if(dTheme.innerText == history[4,5]){  
       dTheme.innerText = rndTheme();
 
     }else{
