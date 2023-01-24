@@ -12,7 +12,17 @@ let dTheme = document.getElementById("display-theme");
 let list = document.getElementById("name-list");
 let themeList = document.getElementById("theme-list");
 let names = ["Lucas", "Linus"];
-let themeNames = ["80-tal", "70-tal", "50-tal", "70-tal", "90-tal", "jazz", "superhjältar", "Antagonister", "rustikt och robust"];
+let themeNames = [
+  "80-tal",
+  "70-tal",
+  "50-tal",
+  "70-tal",
+  "90-tal",
+  "jazz",
+  "superhjältar",
+  "Antagonister",
+  "rustikt och robust",
+];
 let history = ["80-tal", "70-tal", "50-tal", "disco", "fantasy"];
 
 saveJSON();
@@ -202,21 +212,11 @@ function rndTheme() {
   return randomTheme;
 }
 
-//!!!!helt fucked. fattar oironiskt inte hur man löser
-
 function displayTheme() {
-  
-    if(dTheme.innerText == history[4,5]){  
-      dTheme.innerText = rndTheme();
-
-    }else{
-      dTheme.innerText = rndTheme();
-
-    }
-
+  do {
+    dTheme.innerText = rndTheme();
+  } while (history.includes(dTheme.textContent));
 }
-// const found = history.some(r=> .indexOf(r) >= 0)
-
 
 //!-------------------------------------------------------display name and theme ----------------------------------------------------------------
 
