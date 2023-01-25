@@ -63,6 +63,8 @@ themeNames.forEach((item) => {
 function addThemes() {
   if (document.getElementById("theme").value == "") {
     alert("write themeName");
+  }else if (themeNames.includes(document.getElementById("theme").value)) {
+      alert("no duplicates")
   } else {
     while (themeList.firstChild) themeList.removeChild(themeList.firstChild);
 
@@ -82,7 +84,9 @@ function addThemes() {
 
     document.getElementById("theme").value = "";
     console.log(themeNames);
-  }
+  } 
+  
+  
 }
 
 //!------------------------------------------------------------- clear theme -----------------------------------------------------------------
@@ -245,6 +249,14 @@ function weekHistory() {
   console.log(history);
 }
 
+//!------------------------------------------------------------- animation ------------------------------------------------------------------------
+
+
+function ani(){
+
+  document.getElementById('display-theme').className = 'classname';
+}
+
 //!------------------------------------------------------------- Buttons ------------------------------------------------------------------------
 
 addNameBtn.addEventListener("click", () => {
@@ -266,6 +278,7 @@ clearNameBtn.addEventListener("click", () => {
 rndBtn.addEventListener("click", () => {
   weekHistory();
   displayBoth();
+  ani();
 });
 
 deleteNameBtn.addEventListener("click", () => {
