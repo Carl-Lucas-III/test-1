@@ -1,3 +1,4 @@
+
 //variables
 let addNameBtn = document.getElementById("addName");
 let addThemeBtn = document.getElementById("addTheme");
@@ -6,6 +7,8 @@ let clearThemeBtn = document.getElementById("clearTheme");
 let deleteNameBtn = document.getElementById("deleteName");
 let deleteThemeBtn = document.getElementById("deleteTheme");
 let rndBtn = document.getElementById("rndBtn");
+
+
 let dName = document.getElementById("display-name");
 let dName2 = document.getElementById("display-name2");
 let dTheme = document.getElementById("display-theme");
@@ -23,10 +26,12 @@ let themeNames = [
   "Antagonister",
   "rustikt och robust",
 ];
-let history = ["80-tal", "70-tal", "50-tal", "disco", "fantasy"];
-
+let history = [];
+saveJSON();
 loadJSON();
 
+loadNameList();
+loadThemeList();
 //!--------------------------------------------------------- JSON/local storage -----------------------------------------------------------------
 
 function saveJSON() {
@@ -49,22 +54,53 @@ function loadJSON() {
   }
 }
 
+//!--------------------------------------------------------- loads -----------------------------------------------------------------
+
+
+
+function loadThemeList() {
+  loadJSON();
+  let list = document.getElementById("theme-list");
+  themeNames.forEach((item) => {
+      let li = document.createElement("li");
+      li.innerText = item;
+      list.appendChild(li);
+  })
+  saveJSON();
+}
+
+
+
+function loadNameList() {
+  loadJSON();
+  let list = document.getElementById("name-list")
+  names.forEach((item) => {
+      let li = document.createElement("li");
+      li.innerText = item;
+      list.appendChild(li);
+  })
+  saveJSON();
+}
+
 //!------------------------------------------------------------- add theme -----------------------------------------------------------------
 
-themeNames.forEach((item) => {
-  let li = document.createElement("li");
-  li.innerText = item;
-  themeList.appendChild(li);
-});
+// themeNames.forEach((item) => {
+//   let li = document.createElement("li");
+//   li.innerText = item;
+//   themeList.appendChild(li);
+// });
 
 //& function for theme button V
 
 function addThemes() {
+  loadJSON();
+
   if (document.getElementById("theme").value == "") {
     alert("write themeName");
   }else if (themeNames.includes(document.getElementById("theme").value)) {
       alert("no duplicates")
   } else {
+
     while (themeList.firstChild) themeList.removeChild(themeList.firstChild);
 
     let theme = document.getElementById("theme").value;
@@ -84,13 +120,15 @@ function addThemes() {
     document.getElementById("theme").value = "";
     console.log(themeNames);
   } 
-  
-  
+
+
 }
 
 //!------------------------------------------------------------- clear theme -----------------------------------------------------------------
 
 function clearTheme() {
+  loadJSON();
+
   while (themeList.firstChild) themeList.removeChild(themeList.firstChild);
 
   themeNames.length = 9;
@@ -109,11 +147,14 @@ function clearTheme() {
 //!------------------------------------------------------------- delete latest theme -----------------------------------------------------------------
 
 function deleteTheme() {
+  loadJSON();
+
   if (themeNames.length <= 9) {
     deleteThemeBtn.disabled = true;
     deleteThemeBtn.style.color = "red";
     saveJSON();
   } else {
+
     themeNames.pop();
 
     while (themeList.firstChild) themeList.removeChild(themeList.firstChild);
@@ -131,18 +172,21 @@ function deleteTheme() {
 
 //!------------------------------------------------------------- add name -----------------------------------------------------------------
 
-names.forEach((item) => {
-  let li = document.createElement("li");
-  li.innerText = item;
-  list.appendChild(li);
-});
+// names.forEach((item) => {
+//   let li = document.createElement("li");
+//   li.innerText = item;
+//   list.appendChild(li);
+// });
 
 //& function for name button V
 
 function addNames() {
+  loadJSON();
+
   if (document.getElementById("name").value == "") {
     alert("write a name");
   } else {
+
     while (list.firstChild) list.removeChild(list.firstChild);
 
     let name = document.getElementById("name").value;
@@ -165,6 +209,8 @@ function addNames() {
 //!------------------------------------------------------------- clear name -----------------------------------------------------------------
 
 function clearName() {
+  loadJSON();
+
   while (list.firstChild) list.removeChild(list.firstChild);
 
   names.length = 0;
@@ -176,6 +222,8 @@ function clearName() {
 //!------------------------------------------------------------- delete latest name -----------------------------------------------------------------
 
 function deleteName() {
+  loadJSON();
+
   names.pop();
 
   while (list.firstChild) list.removeChild(list.firstChild);
@@ -236,6 +284,8 @@ function displayBoth() {
 //!------------------------------------------------------------- history ------------------------------------------------------------------------
 
 function weekHistory() {
+  loadJSON();
+
   if (history.length > 4) {
     history.shift();
     history.push(dTheme.textContent);
@@ -248,13 +298,14 @@ function weekHistory() {
   console.log(history);
 }
 
+// saveJSON();
 //!------------------------------------------------------------- animation ------------------------------------------------------------------------
 
 
-function ani(){
+// function ani(){
 
-  document.getElementById('display-theme').className = 'classname';
-}
+//   document.getElementById('display-theme').className = 'classname';
+// }
 
 //!------------------------------------------------------------- Buttons ------------------------------------------------------------------------
 
@@ -277,7 +328,6 @@ clearNameBtn.addEventListener("click", () => {
 rndBtn.addEventListener("click", () => {
   weekHistory();
   displayBoth();
-  ani();
 });
 
 deleteNameBtn.addEventListener("click", () => {
@@ -287,3 +337,5 @@ deleteNameBtn.addEventListener("click", () => {
 deleteThemeBtn.addEventListener("click", () => {
   deleteTheme();
 });
+
+
